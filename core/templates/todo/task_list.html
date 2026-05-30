@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Simple Todo List</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f5f7fa;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            padding: 2rem 1rem;
+        }
+
+        .todo-container {
+            max-width: 550px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            padding: 1.8rem;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 1rem;
+            letter-spacing: -0.3px;
+        }
+
+        .sub {
+            color: #64748b;
+            font-size: 0.85rem;
+            margin-bottom: 1.8rem;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.6rem;
+        }
+
+        /* فرم اضافه کردن todo */
+        .add-form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .add-form input {
+            flex: 1;
+            padding: 12px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 14px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: 0.2s;
+            font-family: inherit;
+        }
+
+        .add-form input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+        }
+
+        .add-form .btn-a {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 14px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-family: inherit;
+        }
+
+        .add-form .btn-a:hover {
+            background: #2563eb;
+        }
+
+        /* لیست todo ها */
+        .todo-list {
+            list-style: none;
+            margin-top: 0.5rem;
+        }
+
+        .todo-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #ffffff;
+            padding: 12px 12px 12px 8px;
+            border-bottom: 1px solid #edf2f7;
+            transition: 0.1s;
+        }
+
+        /* سمت چپ: چکباکس + متن */
+        .todo-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .todo-left input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: #3b82f6;
+        }
+
+        .todo-text {
+            font-size: 1rem;
+            color: #0f172a;
+            word-break: break-word;
+            transition: 0.15s;
+        }
+
+        /* استایل برای when completed (خط خورده) */
+        .completed {
+            text-decoration: line-through;
+            color: #94a3b8;
+        }
+
+        /* دکمه حذف */
+        .delete-btn,
+        .edit-btn {
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: #cbd5e1;
+            transition: color 0.2s;
+            padding: 4px 8px;
+            border-radius: 30px;
+            font-family: monospace;
+        }
+
+        .delete-btn:hover {
+            color: #ef4444;
+            background: #fef2f2;
+        }
+
+        .edit-btn:hover {
+            color: rgb(50, 164, 107);
+            background: #e3f4d9;
+        }
+
+        /* پیام خالی بودن لیست */
+        .empty-message {
+            text-align: center;
+            color: #94a3b8;
+            padding: 2rem 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* footer با آمار */
+        .stats {
+            margin-top: 2.8rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: #475569;
+        }
+
+        .reset-btn {
+            background: none;
+            border: none;
+            color: #ef4444;
+            font-size: 0.75rem;
+            cursor: pointer;
+            font-family: inherit;
+            padding: 4px 8px;
+            border-radius: 20px;
+            transition: transform ease 0.3s,
+                        background ease 0.3s;
+        }
+
+        .reset-btn:hover {
+            background: #fef2f2;
+            text-decoration: underline;
+            transform: scale(1.1);
+        }
+
+        .link_cont {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .link_cont div {
+            display: flex;
+            gap: 10px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .user {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .user i {
+            margin-bottom: 1rem;
+        }
+
+        .a_link {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            text-decoration: none;
+            color: #2563eb;
+            font-size: 14px;
+            transition: transform ease 0.3s;
+        } 
+
+        .logout {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #2563eb;
+            font-size: 14px;
+            transition: transform ease 0.3s;
+        }
+
+        .a_link:hover,
+        .logout:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="todo-container">
+        <div class="header">
+            <h1><i class="fas fa-tasks"></i> Todo List</h1>
+            <span class="user">
+                <i class="fas fa-user user_i"></i>
+                <h1>{{ request.user.username|capfirst }}</h1>
+            </span> 
+        </div>
+
+        <div class="sub"></div>
+
+        <div class="link_cont">
+            <a class="a_link" href="{% url 'todo:create-task' %}"><i class="fas fa-plus-circle"></i> Add</a>
+            <div>
+                <a class="a_link" href="{% url 'accounts:login' %}">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Login</span>
+                </a>
+                <form method="post" action="{% url 'accounts:logout' %}">
+                    {% csrf_token %}
+                    <button class="logout" type="submit">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="sub"></div>
+
+        <ul class="todo-list" id="todoList">
+            {% for task in tasks %}
+            <li class="todo-item">
+                <div class="todo-left">
+                    <h3>{{ task.title|capfirst }}</h3>
+                </div>
+                {% if task.completed %}
+                    <span>Completed</span>
+                {% else %}
+                    <span>inCompleted</span>
+                {% endif %}
+                <div>
+                    <a href="{% url 'todo:delete-task' pk=task.id %}" class="delete-btn"><i class="fas fa-trash-alt"></i></a>
+                    <a href="{% url 'todo:update-task' pk=task.id %}" class="edit-btn"><i class="fas fa-edit"></i></a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <div class="stats">
+            <span id="itemCount">{{ tasks|length }} items</span>
+            <button class="reset-btn" id="resetAllBtn">Clear all</button>
+        </div>
+    </div>
+</body>
+
+</html>

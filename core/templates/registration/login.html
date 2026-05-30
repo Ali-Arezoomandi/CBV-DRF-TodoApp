@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f0f2f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-card {
+            background: white;
+            padding: 2rem 2rem 2.2rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 380px;
+            text-align: center;
+        }
+
+        .login-card h2 {
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            font-size: 1.8rem;
+            color: #1e2a3a;
+            letter-spacing: -0.3px;
+        }
+
+        .input-group {
+            margin-bottom: 1.2rem;
+            text-align: left;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 14px;
+            font-size: 1rem;
+            border: 1px solid #ccd7e6;
+            border-radius: 8px;
+            outline: none;
+            transition: 0.2s;
+            background: #fff;
+            font-family: inherit;
+        }
+
+        .input-group input:focus {
+            border-color: #4a6fa5;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #2c3e50;
+            color: white;
+            font-size: 1rem;
+            font-weight: 500;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 0.5rem;
+            font-family: inherit;
+        }
+
+        button:hover {
+            background: #1e2f3c;
+        }
+
+        .message {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: #a94442;
+            height: 20px;
+        }
+
+        @media (max-width: 450px) {
+            .login-card {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+
+            .login-card h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        .errors {
+            padding-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-card">
+        <h2>Login</h2>
+        <form method="post">
+            {% csrf_token %}
+
+            {% if form.errors %}
+                <div class="errors">
+                    {% for field, errors in form.errors.items %}
+                        {% for error in errors %}
+                            <p class="error">{{ error }}</p>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <div class="input-group">
+                <input type="text" name="username" placeholder="Username" required>
+            </div>
+            <div class="input-group">
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+            <button type="submit">Login</button>
+            <div class="message" id="formMessage">
+                <a href="{% url 'accounts:signup' %}">Sign Up</a>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

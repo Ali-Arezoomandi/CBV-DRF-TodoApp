@@ -40,8 +40,11 @@ INSTALLED_APPS = [
     'accounts',
     'todo',
     'rest_framework',
+    'rest_framework.authtoken',
+    'rest_framework_simplejwt', 
     'django_filters',
     'drf_yasg',
+    'djoser',
 ]
 
 MIDDLEWARE = [
@@ -125,9 +128,9 @@ STATIC_ROOT = BASE_DIR / 'static'
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / 'media'
 
-STATICFILES_DIRS = [
-    BASE_DIR / 'staticfiles',
-]
+# STATICFILES_DIRS = [
+#     BASE_DIR / 'staticfiles',
+# ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -137,3 +140,20 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # for after login
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = 'login'
+
+# User models settings
+AUTH_USER_MODEL = 'accounts.User'
+
+# rest framework default settings
+REST_FRAMEWORK = {
+   'DEFAULT_AUTHENTICATION_CLASSES': [
+       'rest_framework.authentication.SessionAuthentication',
+       'rest_framework.authentication.BasicAuthentication',
+       'rest_framework.authentication.TokenAuthentication',
+       'rest_framework_simplejwt.authentication.JWTAuthentication', 
+   ],
+
+}
+
+# email settings
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

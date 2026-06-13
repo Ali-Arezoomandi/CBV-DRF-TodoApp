@@ -1,5 +1,4 @@
 name: Django Project Test
-
 on:
   push:
     branches: [ "main" ]
@@ -7,16 +6,22 @@ on:
     branches: [ "main" ]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v4
-    - name: Setup Django
-      working-directory: ./core  
-      run: python manage.py runserver
+    
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+    
+    - name: Install Dependencies
+      working-directory: ./core
+      run: pip install -r requirements.txt
+    
     - name: Run Tests
-      working-directory: ./core 
-      run: flake8 && pytest
+      working-directory: ./core
+      run: |
+        flake8
+        pytest

@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.views.generic import ListView, UpdateView, DeleteView, CreateView
 from todo.models import Task
 from todo.forms import TaskForm
@@ -37,6 +36,7 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
     def get_queryset(self):
         return Task.objects.filter(user=self.request.user)
 
+
 class TaskUpdateView(LoginRequiredMixin, UpdateView):
     """
     a class for update a task
@@ -46,7 +46,7 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
     form_class = TaskForm
     success_url = "/"
     template_name = "todo/task_form_update.html"
-    
+
     def get_queryset(self):
         return Task.objects.filter(user=self.request.user)
 
@@ -59,7 +59,6 @@ class TaskDeleteView(LoginRequiredMixin, DeleteView):
     model = Task
     success_url = "/"
     context_object_name = "task"
-    
+
     def get_queryset(self):
         return Task.objects.filter(user=self.request.user)
-         

@@ -15,7 +15,6 @@ from .serializers import (
     ActivationResendApiSerializer,
 )
 from django.core.mail import send_mail
-from django.shortcuts import get_object_or_404
 import jwt
 from jwt.exceptions import ExpiredSignatureError, InvalidSignatureError
 from django.conf import settings
@@ -99,9 +98,7 @@ class ChangePasswordApiView(GenericAPIView):
         user_obj = self.get_object()
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
-            if not user_obj.check_password(
-                serializer.validated_data["old_password"]
-            ):
+            if not user_obj.check_password(serializer.validated_data["old_password"]):
                 return Response(
                     {"old_password": ["Wrong password"]},
                     status=status.HTTP_400_BAD_REQUEST,
@@ -121,9 +118,7 @@ class ActivationApiView(GenericAPIView):
 
     def get(self, request, token, *args, **kwargs):
         try:
-            token = jwt.decode(
-                token, settings.SECRET_KEY, algorithms=["HS256"]
-            )
+            token = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
             user_id = token.get("user_id")
         except ExpiredSignatureError:
             return Response(
@@ -138,16 +133,12 @@ class ActivationApiView(GenericAPIView):
 
         user = User.objects.get(pk=user_id)
         if user.is_verified:
-            return Response(
-                {"detail": "your account have already been verified."}
-            )
+            return Response({"detail": "your account have already been verified."})
         user.is_verified = True
         user.save()
 
         return Response(
-            {
-                "detail": "your account have been verified and activated successfully."
-            }
+            {"detail": "your account have been verified and activated successfully."}
         )
 
 

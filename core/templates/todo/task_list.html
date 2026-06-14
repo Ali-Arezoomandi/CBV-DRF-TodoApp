@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -180,7 +182,7 @@
             padding: 4px 8px;
             border-radius: 20px;
             transition: transform ease 0.3s,
-                        background ease 0.3s;
+                background ease 0.3s;
         }
 
         .reset-btn:hover {
@@ -223,7 +225,7 @@
             color: #2563eb;
             font-size: 14px;
             transition: transform ease 0.3s;
-        } 
+        }
 
         .logout {
             background: none;
@@ -248,7 +250,7 @@
             <span class="user">
                 <i class="fas fa-user user_i"></i>
                 <h1>{{ request.user.username|capfirst }}</h1>
-            </span> 
+            </span>
         </div>
 
         <div class="sub"></div>
@@ -272,30 +274,16 @@
 
         <div class="sub"></div>
 
-        <ul class="todo-list" id="todoList">
-            {% for task in tasks %}
-            <li class="todo-item">
-                <div class="todo-left">
-                    <h3>{{ task.title|capfirst }}</h3>
-                </div>
-                {% if task.completed %}
-                    <span>Completed</span>
-                {% else %}
-                    <span>inCompleted</span>
-                {% endif %}
-                <div>
-                    <a href="{% url 'todo:delete-task' pk=task.id %}" class="delete-btn"><i class="fas fa-trash-alt"></i></a>
-                    <a href="{% url 'todo:update-task' pk=task.id %}" class="edit-btn"><i class="fas fa-edit"></i></a>
-                </div>
-            </li>
-            {% endfor %}
-        </ul>
+        <ul class="todo-list" id="todoList"></ul>
 
         <div class="stats">
             <span id="itemCount">{{ tasks|length }} items</span>
             <button class="reset-btn" id="resetAllBtn">Clear all</button>
         </div>
     </div>
+
+    <script src="{% static 'js/index.js' %}"></script>
+
 </body>
 
 </html>

@@ -218,38 +218,34 @@ Insert sample data:
 ```bash
 python manage.py insert_data
 ```
-
 ---
 
 ## Screenshots
 
-### Task List
+### Authentication
 
-![Task List](readme/Todo.png)
+<p align="center">
+  <img src="readme/Login.png" width="45%">
+  <img src="readme/Sign_Up.png" width="45%">
+</p>
 
-### Create Task
+### Task Management
 
-![Create Task](readme/Add.png)
+<p align="center">
+  <img src="readme/Todo.png" width="45%">
+  <img src="readme/Add.png" width="45%">
+</p>
 
-### Update Task
+<p align="center">
+  <img src="readme/Update.png" width="45%">
+  <img src="readme/Delete.png" width="45%">
+</p>
 
-![Update Task](readme/Update.png)
+### REST API
 
-### Delete Task
-
-![Delete Task](readme/Delete.png)
-
-### Login Task
-
-![Login Task](readme/Login.png)
-
-### Sign Up Task
-
-![Sign Up Task](readme/Sign_Up.png)
-
-### API
-
-![API](readme/api.png)
+<p align="center">
+  <img src="readme/api.png" width="85%">
+</p>
 
 ---
 

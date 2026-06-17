@@ -59,6 +59,7 @@ class TaskDeleteView(LoginRequiredMixin, DeleteView):
     model = Task
     success_url = "/"
     context_object_name = "task"
+    template_name = "todo/task_form_delete.html"
 
     def get_queryset(self):
         return Task.objects.filter(user=self.request.user)

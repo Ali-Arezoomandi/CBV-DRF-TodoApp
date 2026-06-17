@@ -12,41 +12,43 @@
 </head>
 
 <body>
-    <div class="todo-container">
-        <div class="header">
-            <h1><i class="fas fa-tasks"></i> Todo List</h1>
-            <span class="user">
-                <i class="fas fa-user user_i"></i>
-                <h1>{{ request.user.username|capfirst }}</h1>
-            </span>
-        </div>
-
-        <div class="sub"></div>
-
-        <div class="link_cont">
-            <a class="a_link" href="{% url 'todo:create-task' %}"><i class="fas fa-plus-circle"></i> Add</a>
-            <div>
-                <a class="a_link" href="{% url 'accounts:login' %}">
-                    <i class="fas fa-sign-in-alt"></i>
-                    <span>Login</span>
-                </a>
-                <form method="post" action="{% url 'accounts:logout' %}">
-                    {% csrf_token %}
-                    <button class="logout" type="submit">
-                        <i class="fas fa-sign-out-alt"></i>
-                        <span>Logout</span>
-                    </button>
-                </form>
+    <div class="container">
+        <div class="todo-container">
+            <div class="header">
+                <h1><i class="fas fa-tasks"></i> Todo List</h1>
+                <span class="user">
+                    <i class="fas fa-user user_i"></i>
+                    <h1>{{ request.user.username|capfirst }}</h1>
+                </span>
             </div>
-        </div>
 
-        <div class="sub"></div>
+            <div class="sub"></div>
 
-        <ul class="todo-list" id="todoList"></ul>
+            <div class="link_cont">
+                <a class="a_link" href="{% url 'todo:create-task' %}"><i class="fas fa-plus-circle"></i> Add</a>
+                <div>
+                    <a class="a_link" href="{% url 'accounts:login' %}">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span>Login</span>
+                    </a>
+                    <form method="post" action="{% url 'accounts:logout' %}">
+                        {% csrf_token %}
+                        <button class="logout" type="submit">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
 
-        <div class="stats">
-            <span id="itemCount">{{ tasks|length }} items</span>
-            <button class="reset-btn" id="resetAllBtn">Clear all</button>
+            <div class="sub"></div>
+
+            <ul class="todo-list" id="todoList"></ul>
+
+            <div class="stats">
+                <span id="itemCount">{{ tasks|length }} items</span>
+                <a href="{% url 'todo:api-v1:clear-all' %}" class="reset-btn" id="resetAllBtn">Clear all</a>
+            </div>
         </div>
     </div>
 

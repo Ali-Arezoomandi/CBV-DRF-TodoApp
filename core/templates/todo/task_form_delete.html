@@ -6,20 +6,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create</title>
+    <title>Delete</title>
     <link rel="stylesheet" href="{% static 'css/task_form_create.css' %}">
 </head>
 
 <body>
     <div class="login-card">
-        <h2>Add Todo</h2>
+        <h2>Delete Todo</h2>
         <form id="loginForm" method="post">
             {% csrf_token %}
-            <div class="input-group">
-                <input type="text" name="title" placeholder="Title" autocomplete="off" required>
-            </div>
+            <h4>Do you want to delet this task ? </h4>
             <button type="submit">Add</button>
-            <div class="message" id="formMessage"></div>
         </form>
     </div>
 </body>

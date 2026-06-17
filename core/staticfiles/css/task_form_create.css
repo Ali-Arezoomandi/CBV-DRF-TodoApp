@@ -88,3 +88,8 @@ button:hover {
         font-size: 1.5rem;
     }
 }
+
+h4 {
+    font-weight: 500;
+    margin-bottom: 1rem;
+}

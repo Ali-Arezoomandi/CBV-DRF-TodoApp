@@ -40,7 +40,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("todo.urls")),
     path("accounts/", include("accounts.urls")),
-    path("api/v1/", include("todo.api.v1.urls")),
     path(
         "swagger/output.json",
         schema_view.without_ui(cache_timeout=0),

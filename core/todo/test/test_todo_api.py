@@ -29,7 +29,6 @@ class TestTodoAPi:
     # for get task
     def test_get_task_response_200_status(self, api_client, common_user):
         api_client.force_authenticate(common_user)
-        
         url = "http://127.0.0.1:8000/api/v1/task/"
         response = api_client.get(url)
 
@@ -38,8 +37,7 @@ class TestTodoAPi:
     # get single task
     def test_get_single_task_200_status(self, api_client, task, common_user):
         api_client.force_authenticate(common_user)
-
-        url = "http://127.0.0.1:8000/api/v1/task/"  
+        url = "http://127.0.0.1:8000/api/v1/task/"
         response = api_client.get(url, kwargs={"pk": task.id})
 
         assert response.status_code == 200

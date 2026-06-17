@@ -1,5 +1,11 @@
 # CBV-DRF Todo App
 
+![Python](https://img.shields.io/badge/Python-3.13-blue)
+![Django](https://img.shields.io/badge/Django-5.x-green)
+![DRF](https://img.shields.io/badge/DRF-Rest_Framework-red)
+![Pytest](https://img.shields.io/badge/Tested_with-Pytest-orange)
+![License](https://img.shields.io/badge/License-MIT-lightgrey)
+
 A Todo Application built with **Django**, **Class Based Views (CBV)** and **Django REST Framework (DRF)**.
 
 This project demonstrates how to build a complete Todo Management System with:
